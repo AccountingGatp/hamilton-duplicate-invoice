@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f6f1">
+  <title>Duplicate Invoice Check | GATP Solutions</title>
+</head>
+<body>
+  <header class="site-header"><div class="shell"><span class="brand-mark" aria-hidden="true">G</span><strong>GATP Solutions</strong><span class="product-label">Accounts payable</span></div></header>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">PAYMENT REVIEW</p>
+      <h1>Duplicate Invoice Check</h1>
+      <p>Compare unpaid invoices with paid records and bank withdrawals before issuing payment.</p>
+    </section>
+
+    <form id="checker">
+      <section class="panel" aria-labelledby="invoice-heading">
+        <div class="section-heading"><h2 id="invoice-heading">Invoice reports</h2><p>Choose ResMan PDF exports or invoice CSV files for any date range.</p></div>
+        <div class="file-grid">
+          <label class="file-card"><strong>Unpaid invoices</strong><span>Invoices to check · Required</span>
+            <input id="unpaid" type="file" accept=".pdf,.csv" multiple required>
+          </label>
+          <label class="file-card"><strong>Paid invoices</strong><span>Payment history · Optional</span>
+            <input id="paid" type="file" accept=".pdf,.csv" multiple>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="bank-heading">
+        <div class="section-heading">
+          <h2 id="bank-heading">Bank activity <span class="optional">Optional</span></h2>
+          <p>Add a Chase activity CSV for each account you want to check. Enter the property codes served by that account.</p>
+        </div>
+        <div id="bank-files"></div>
+        <button type="button" class="secondary" id="add-bank">+ Add bank CSV</button>
+      </section>
+
+      <div class="actions">
+        <button id="run" type="submit" class="primary">Check invoices</button>
+        <span class="muted">Files are processed in this browser.</span>
+      </div>
+      <p id="feedback" role="status" aria-live="polite" hidden></p>
+    </form>
+
+    <section id="results" class="panel results" aria-labelledby="results-heading" hidden>
+      <div class="results-heading">
+        <div class="section-heading"><h2 id="results-heading" tabindex="-1">Review results</h2><p id="coverage"></p></div>
+        <button class="secondary" id="download" type="button">Download review CSV</button>
+      </div>
+      <div id="totals" class="totals"></div>
+      <details id="sources"><summary>Files and coverage</summary><ul></ul></details>
+      <details id="warnings" class="warnings" hidden><summary></summary><ul></ul></details>
+      <div class="filters">
+        <label>Result<select id="filter">
+          <option value="flagged">All flagged invoices</option>
+          <option value="all">All invoices</option>
+          <option value="paid">Paid report match</option>
+          <option value="open">Repeated unpaid invoice</option>
+          <option value="review">Invoice details to review</option>
+          <option value="bank">Bank amount to review</option>
+          <option value="clear">No match found</option>
+        </select></label>
+        <label>Search invoices<input type="search" id="search" placeholder="Vendor, invoice number or property"></label>
+      </div>
+      <div class="table-wrap" tabindex="0" aria-label="Invoice comparison results">
+        <table>
+          <thead><tr><th scope="col">Vendor / invoice</th><th scope="col">Property</th><th scope="col">Invoice date</th><th scope="col">Invoice total</th><th scope="col">Open balance</th><th scope="col">Review result</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="pagination"><span id="page-info" aria-live="polite"></span><div><button class="secondary" id="prev" type="button">Previous</button><button class="secondary" id="next" type="button">Next</button></div></div>
+    </section>
+  </main>
+  <template id="bank-row">
+    <div class="bank-row">
+      <label>Bank activity file<input type="file" accept=".csv" required></label>
+      <label>Property codes<input type="text" placeholder="Example CON, PFA" required></label>
+      <button class="secondary" type="button">Remove</button>
+    </div>
+  </template>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
