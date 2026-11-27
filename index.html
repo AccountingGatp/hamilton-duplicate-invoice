@@ -7,7 +7,20 @@
   <title>Duplicate Invoice Check | GATP Solutions</title>
 </head>
 <body>
-  <header class="site-header"><div class="shell"><span class="brand-mark" aria-hidden="true">G</span><strong>GATP Solutions</strong><span class="product-label">Accounts payable</span></div></header>
+  <header class="site-header"><div class="shell"><span class="brand-mark" aria-hidden="true">G</span><strong>GATP Solutions</strong><span class="product-label">Accounts payable</span><button id="open-sop" class="sop-trigger" type="button" aria-haspopup="dialog" aria-controls="sop">View SOP</button></div></header>
+<dialog id="sop" aria-labelledby="sop-title">
+  <div class="sop-heading">
+    <h2 id="sop-title">Duplicate invoice SOP</h2>
+    <button id="close-sop" class="sop-close" type="button" autofocus>Close</button>
+  </div>
+  <ol class="sop-steps">
+    <li><strong>Prepare the invoice reports.</strong> Export Unpaid Invoices from ResMan and select it under Unpaid invoices. Add a Paid Invoices export that covers when the invoices may have been paid. Use text-based report PDFs or invoice CSVs with one row per invoice and the property code included.</li>
+    <li><strong>Add bank activity if available.</strong> Select + Add bank CSV for each Chase operating account you want to check. Enter the property codes that use that account. Separate codes with commas for a shared account.</li>
+    <li><strong>Run the check.</strong> Select Check invoices. Open Files and coverage and review any import notes to verify which files and dates were included.</li>
+    <li><strong>Review before paying.</strong> Open the matching evidence for paid report matches, repeated unpaid invoices, and similar invoice details. For a bank amount match, verify the payee, date, and reference. No match found only covers the uploaded files.</li>
+    <li><strong>Save the results.</strong> Select Download review CSV to retain the invoice details, match reasons, and source references.</li>
+  </ol>
+</dialog>
   <main class="shell">
     <section class="intro">
       <p class="eyebrow">PAYMENT REVIEW</p>

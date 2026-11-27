@@ -231,3 +231,6 @@ $('download').addEventListener('click', () => {
   link.click()
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 })
+
+document.getElementById('open-sop').addEventListener('click', () => document.getElementById('sop').showModal())
+document.getElementById('close-sop').addEventListener('click', () => document.getElementById('sop').close())
